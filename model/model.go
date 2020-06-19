@@ -16,15 +16,14 @@ func GetDb() (db *gorm.DB) {
 
 func InitDb() {
 	var err error
-
+	url := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=True&loc=Local",
+		conf.Username,
+		conf.Password,
+		conf.Host,
+		conf.Port,
+		conf.Dbname)
 	// 打开连接
-	gormDb, err = gorm.Open("mysql",
-		fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=True&loc=Local",
-			conf.Username,
-			conf.Password,
-			conf.Host,
-			conf.Port,
-			conf.Dbname))
+	gormDb, err = gorm.Open("mysql", url)
 	if err != nil {
 		log.Fatal("MySQL 数据库无法连接", err)
 	}
