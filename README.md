@@ -6,29 +6,17 @@
    go build
    ```
 
-2. 初始化
-
-   ```bash
-   db_check -type init -username root -password 123456 -host localhost -port 3306 -dbname test
-   ```
-
-3. 检测
-    > 需要将 db_check.json 文件放到当前路径下
-
-   ```bash
-   db_check -type check -username root -password 123456 -host localhost -port 3306 -dbname test
-   ```
-
-4. 参数说明
-
-    > 默认参数即示例参数, type默认为init
-
-   | 参数     | 说明                                              |
-   | -------- | ------------------------------------------------- |
-   | type     | 要执行的操作, 初始化使用 `init`  检测使用 `check` |
-   | username | 数据库用户名                                      |
-   | password | 数据库密码                                        |
-   | host     | 数据库服务地址                                    |
-   | port     | 端口号                                            |
-   | dbname   | 数据库名                                          |
-
+2. 使用
+  ```bash
+Usage:
+    db_check [command] [json/ini] [json]
+The commands are:
+    start      将当前数据库结构保存为文件
+    compare    检测文件变更
+Examples:
+        // 将 root@localhost.ini 中配置的数据库信息保存到 a.json 件中
+        db_check start root@localhost.ini a.json
+        // 比对 b.json 对于 a.json 的变化, 并将结果保存到 c.txt 中
+        db_check compare a.json b.json c.txt
+  
+  ```
